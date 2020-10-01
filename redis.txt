@@ -1,0 +1,169 @@
+redis 默认有16个数据库
+select 0  选择第0个数据库
+dbsize     查看数据库的大小
+flushall   清除所有数据库中数据
+flushdb   清除当前数据库中数据
+keys *     所有key值
+exists name   判断key为name是否存在
+expire name 10   设置name 的时间为10秒
+ttl name   查看剩余时间
+type key  查看类型
+append key1 "hello"     在key1 后追加hello    如果key1不存在，这个命令相当于set
+del key1        删除
+strlen  key1       查看字符串长度
+incr  count     自动加1
+decr count     自动减1
+incrby count 10  自动加10
+decrby count 10 自动减10
+
+getrange name 0 3    截取字符串
+setrange name 1 asd   替换自定位置字符串
+ 
+setex key3 30 "hello"   设置过期时间
+setnx key3 "hello"      如果key存在，那么久不修改，如果key不存在，就将key值设置为hello
+
+
+mset k1 v1 k2 v2 k3 v3
+mget k1 k2 k3
+
+
+设置对象
+set user:1 {name:zhangsan,age:3}        
+
+mget user:1:name  user:1:age
+
+getset  db redis        先get 再set     不存在就创建，存在就替换值
+
+
+
+
+List 操作
+
+LPUSH list one       左插入
+RPUSH list two      又插入
+LRANGE list 0 -1       
+LPOP list       左移除
+LINDEX list 1   获取索引1
+LLEN list      判断长度
+LREM list 1 one       删除一个one
+
+Ltrim list  1 2   截取1到2 两个数据        list被修改
+RpopLpush  list2 list1    将list2的第一个元素添加到list1中
+lset list 0 "hello"       将指定位置设为hello
+linsert list before "world" "other"       # 在world前面插入other  after则是在后面
+
+
+
+set 操作
+set 不允许重复  无序
+
+sadd set1 "hello"
+smembers set1    查看所有值
+smembers set1 hello     判断某一个是不是set1中
+scard set1        判断个数
+
+srem set1 hello   移除元素
+srandmembers set1   随机抽出一个元素
+
+spop set1   随机移除元素
+smove set1 set2 hello      将set1 的指定值移到set2
+sdiff   set1 set2           两个集合的差集
+sinter  set1 set2           交集
+sunion  set1 set2          并集
+
+
+
+hash  
+哈希操作大多数和string相似
+key-map集合
+
+hset hash1 key1 v1
+hget hash1 key1
+hmset       设置多个值
+hmget       获取多个值
+hgetall      获取hash多个值
+hdel   hash1 k1    删除key
+hlen    hash1    长度
+hexists hash key1    产看hash字段是否存在
+hkeys        查看所有key
+hvals         查看所有值
+
+
+
+zset  有序集合
+就是在set基础上加一个 排序的数字
+
+zadd zset 1 one      添加一个one值，根据1来排序
+zadd zset 5 two
+zadd zset 3 three 
+zrange zset 0 -1
+
+zrangebyscore   zset -inf +inf      负无穷到正无穷
+zrem       移除元素
+
+  
+
+geospatial   地理位置
+
+geoadd china:city 121.47  31.23  shanghai         经纬度
+
+geopos china:city shanghai              获取指定经纬度 
+
+geodist china:city  beijin shanghai km       北京到上海的距离  km为单位
+
+georadius china:city  110 30 500 km        查找以经度110 纬度30 为中心 半径为500km 范围内的城市
+
+georadius china:city  110 30 500 km  withdist     并输出距离中心的距离
+
+georadius china:city  110 30 500 km  withcoord     并输出经纬度
+
+georadius china:city  110 30 500 km  withcoord  count  3     显示查找数量为3
+
+georadiusbymember china:city shanghai 100km     获取距北京100km以内的城市
+
+zrange china:city 0 -1       基本操作与zset相似
+
+
+
+hyperloglog   基数统计      例如网站访问量
+
+pfadd  key1  a b c d e f g
+
+pfcount  key1             查看数量
+
+pfmerge  key3  key1  key2       将key1， key2 合并。 并集
+
+
+
+bitmaps 位存储    统计用户信息，活跃，不活跃
+用0和1去存储
+setbit sign  0 0         0是没打卡  1 为打卡
+setbit sign 1 0
+setbit sign 2 1        
+
+getbit sign 1    获取某一天的打卡记录
+
+bitcount sign      获取所有的打卡次数
+
+
+事务处理：
+
+multi  开启事务 
+
+exec   执行
+
+multi  开启事务
+
+discard   取消事务
+
+
+乐观锁：
+当在执行事务，另外一个线程也在执行，就会出现错误
+
+watch key1    监测
+
+unwatch      解锁
+
+
+
+redis 缓存穿透与雪崩

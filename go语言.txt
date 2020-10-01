@@ -1,0 +1,731 @@
+package main  
+fmt    是输出包
+print  输出不换行，一行内输出多个不空格
+println   输出换行 ，一行内输出多个 元素之间有空格
+printf     格式化输出，
+%v原样输出，%d十进制输出  %02d  2为宽度，如果不够两个数字，前面补0 ，%T输出数据类型，%b二进制输出，%o八进制输出，%x十六进制输出  
+%f 浮点型输出默认保留6位小数，%.3f 保留三位小数
+%c输出字符       %t 输出布尔值
+
+
+数据类型转换时尽量地位往高位转换     避免高位往地位转换，因为可能导致数据溢出
+
+
+引用数据类型：指针，切片,map类型            必须分配内存空间后才能添加元素     可通过new和make来实现
+
+变量声明： 和JS部分相同
+var 变量名 数据类型
+var a,b,c string
+
+var (a string,b int ,c bool)
+
+var a =1
+
+短变量声明
+
+a := 1        # 这种方法只能作为局部变量使用
+
+匿名变量： _下划线表示  # 不占用命名空间
+
+
+常量声明：const      必须初始化
+
+const a = iota       # iota 是go的计数器      a=0
+
+const (                              # 如果当声明多个常量时 ，有几个没初始化值，那将等于第一个值。
+	b =iota           # 因为b=iota  所以b =0 , c=1 ,d=2
+	c
+	d
+)
+
+const (
+	b=iota
+	c=100
+	d =iota
+	e 
+)
+b=0     c=100  d=2  e=3
+
+
+
+整型：
+int8,int16,int32,int64
+uint8,uint16,uint32,uint64   # 正整数
+
+unsafe.Sizeof(a)      # 查看数据在内存的大小
+
+
+浮点型：
+float32,float64
+3.14e2  3.14乘以10的2次方
+
+
+字符串型
+String
+
+转义字符
+\r       回车符
+\n       换行
+\t       空格符
+\'       单引号
+\"      双引号
+\\      反斜杠
+
+
+字符串的常用操作
+
+len(str)    长度
+strings.Split(str,',')      以，号分割为数组
+strings.contains(str1,str2)   # 判断str1中是否包含str2
+strings.HasPrefix(str1,str2) # 判断前缀
+strings.HasSuffix(str1,str2) # 判断后缀
+
+strings.index(st1,st2)     # 判断子串的位置 从左往右查找         -1表示查找不到
+strings.LastIndex(st1,st2)     # 判断子串的位置  从右往左
+
+strings.join(str,'*')        # 将数组转为字符
+
+
+
+定义字符
+字符都输与int型
+byte型（ascii码字符）  rune型（utf-8字符）      
+
+一个中文字符占3个字节
+
+var a='a'         Printf('%v',a)    输出：97(ascii码)  Printf('%c',a)   输出：a      
+
+修改字符串中字符
+s1 :='big'
+bytearr = []byte(s1)
+bytearr[0] = 'p'
+fmt.Println(string(bytearr))         输出：'pig'
+
+当有中文时
+s1:='你好'
+runearr := []rune(s1)
+runearr[0] = '您'
+fmt.Pringf(string(runearr))              输出：'您好'
+
+
+
+数据类型转换：
+var a int = 20
+var b float64 = 12.23
+var c bool = true
+var d byte = 'a'
+
+fmt.Sprintf('%d',a)        # 将int型转换为字符型
+
+fmt.Sprintf('%f',b)       # 将浮点型转为字符型
+
+fmt.Sprintf('%t',c)
+
+fmt.Sprintf('%c',d)
+
+
+
+
+
+
+if 表达式1{
+
+}else if 表达式2{
+	
+}else{
+	
+}
+
+
+for i:=0;i<10;i++{
+
+}
+
+for {
+	无限循环
+}
+
+for i<10 {
+	i++
+}
+
+arr :=[]strings{"asd","xzc"}
+for k,v := range arr{
+
+}
+
+
+var a = ".html"
+switch a{
+case ".html":
+	fmt.Println("text/html")
+	break
+case ".css":
+	fmt.Println("text/css")
+	fallthrough                                  # 当满足这个case，也将执行下一个case
+case ".js":
+	fmt.Println("text/js")
+	break
+default:
+	break
+}
+
+
+
+
+
+
+
+break , continue , goto
+
+在多重循环中，用label标出想break的循环
+
+label1:
+	for i:=0;i<10;i++{
+		for j:=0;j<10;j++{
+			break  label1	
+}
+}
+
+
+goto label2          直接跳到label2位置执行
+
+
+
+
+
+
+数组声明：
+
+1. var arr [3]int
+2. var arr = [3]int{1,2,3}
+3, arr:=[3]int{1,2,3}
+4. var arr=[...]int{1,2,3}             # 让编译器自动寻找数组长度
+5.var arr=[3]int{0:1,2:1}        # 0位置值为1 2位置值为1 
+
+
+值类型和引用数据类型
+
+数组是值类型  值类型:改变副本的值，不会改变变量本身
+例子：
+var arr :=[3]int{1,2,3}
+arr1 :=arr
+arr[0]=11
+
+输出： arr=[11,2,3]    arr1=[1,2,3]
+
+切片是引用类型        引用类型:改变副本的值，会改变变量本身
+切片可以使用len查看长度，cap查看容量      例如   a:=[8]int       a[1:5]      长度为4    容量为7   从1位置开始到最后                    
+
+例子
+var arr:=[]int{1,2,3}
+arr2:=arr
+arr[0]=11
+
+输出：arr=[11,2,3]   arr2=[11,2,3]
+
+
+
+多维数组：
+var arr=[2][2]int{{1,2},{3,4}}          # 数组中...就是自动寻找个数
+
+
+生成切片：
+var arr =[]int
+
+这种是空切片，添加数据要用append
+res :=append(arr,1,2,3)         
+
+append 还可以合并两个切片
+append(arr,arr2...)    将arr2合并到arr中
+
+arr := make([]int,4 ,8)      # 生成长度为4，容量为8的切片。默认值为0
+
+copy(arr2,arr1)      # 将arr1复制到arr2中
+ 
+
+
+
+map类型数据  键值对
+
+
+第一种创建方式：
+通过make来实现
+                              
+user := make(map[string]string)       # 1.key值类型      2.value值类型  
+user["name"]="song"
+
+第二种创建方式：
+
+var user :=map[string]string{"username":'song',"age":18,}
+
+获取map类型的特殊用法
+v,ok:=user["username"]
+v=18     ok=true          # 如果这个存在就是true ,不存在就是false
+
+删除key
+
+delete(user,"age")      # 删除key为age
+
+定义map类型的切片        # {{"name":"asd"}，{"name":"zxc"}}
+var userinfo = make([]map[string]string,2,3)        长度为2.容量为3
+userinfo[0] = make(map[string]string)
+userinfo[1] = make(map[string]string)
+
+
+定义切片类型的map         # {{"name":[1,2,3]},{"age":[1,2,3]}}
+
+var userinfo = make(map[string][]string)     # 未初始化的map
+userinfo["name"] = []string{                    # 初始化切片
+	"song",
+	"jack",
+}
+
+
+
+定义函数：
+func pic(x int, y int) int{      # 第一个参数可以不加数据类型，第二个必须加
+}
+
+func pic(x ...int) int{    # ...表示参数个数可变      并传给x，x是一个切片
+
+}
+
+
+
+使用type 定义函数类型     ，可以将函数赋值给函数类型。函数类型通过加参，就可以实现对应函数
+
+type是自定义类型
+type calc func(int,int)int            # 赋值的函数必须满足生成的这个函数类型
+使用前需实例化
+var cal calc
+
+
+函数例子：
+func add(x,y int) int{
+	return x+y
+}
+type calc func(int,int)int
+
+func calculate(x,y int,cb calc)int{
+	return cb(x,y)
+}
+
+func main(){
+	calculate(1,2,add)       
+	或者   calculate(1,2,func(x,y int)int{return x+y})
+}
+
+
+
+
+匿名返回值
+func f2()(x int){
+	defer func(){
+         	x++
+}()
+	return 5
+}                                               # defer是延迟执行       x是匿名返回值      先返回5，在执行x++
+
+
+
+
+
+异常处理：
+panic  主动抛出异常    recover 接收异常，要与defer连用    errors.New("异常原因")
+
+func fn(){
+	defer fun(){
+	err := recover()
+	if err !=nil{
+		fmt.Println("抛出异常给管理")
+	
+		}
+		
+	}()
+	
+	panic("抛出异常")
+}  
+
+
+
+
+指针            指针类型     *int ,*string 等
+a=10
+&a   a的地址
+b=&a   a的地址传给b，b也有自己的地址&b          类型时 *int
+*b   就是取出b地址的值
+
+指针必须先分配内存空间，才能赋值
+var a = new(int)  # a 是*int类型的指针，默认值为0
+
+
+
+结构体  （类）       首字母大写表示共有的，小写表示私有的
+定义：
+type person struct{
+	name string
+	age int
+	sex string
+}
+
+
+
+实例化：
+方法一：
+func main(){
+	var p1 person
+	p1.name = "song"
+	p1.sex = "男"
+	p1.age = 20
+
+}
+
+方法二：
+
+	var p1 = new(person)       # 这种方式返回的是指针类型
+	p1.name = "song"
+	p1.sex = "男"
+	p1.age = 20
+方法三：
+	p1 := &person{}               # 这种返回的也是指针类型
+	p1.name = "song"
+	p1.sex = "男"
+	p1.age = 20
+
+方法四：
+	var p1 = person{
+	name:"song",
+	age:20,
+	Sex:"男",
+}
+
+
+
+结构体方法：
+
+例子：
+type person struct{
+	name string
+	age int
+	sex string
+	height int
+}
+
+func (p person) personinfo(){
+	fmt.Println(p.name,p.age)
+}
+
+func main(){
+	var p1= person{
+	name:"song",
+	age:20,
+	sex:"男",
+	}
+	p1.personinfo()
+}
+
+
+
+结构体嵌套：
+type User struct{
+	Name string                     
+	Password string
+	Address Address                 
+}
+type  Address struct {
+	city string
+	phone string
+}
+func main()  {
+	var user User
+	user.Name="song"
+	user.Password="123"
+	user.Address.city="Shanghai"
+	user.Address.phone="1230978"
+	fmt.Println(user)
+}
+
+
+
+结构体继承：
+type animal struct{
+	name string
+
+}
+func (a animal) run(){
+	fmt.Printf("%v running\n",a.name)
+}
+
+type dog struct{
+	age int
+	animal        // 继承animal类
+}
+
+func (d dog) run2() {
+	fmt.Printf("%v stop\n",d.name)
+}
+
+
+func main()  {
+	var an = dog{
+		age:20,
+		animal:animal{
+			name: "小黄",
+		},
+	}
+	an.run()
+	an.run2()
+}
+
+
+
+
+将结构体转换成json数据
+
+
+type test struct {
+	Name string         // 属性不许是共有的才能转换成json数据
+	Age int
+	Sex string
+}
+
+func main()  {
+	var ts = test{
+		Name: "song",
+		Age: 21,
+		Sex: "male",
+	}
+	json_data,_ :=json.Marshal(ts)    // 返回第一个数据是byte型的切片，第二个是error
+	fmt.Println(string(json_data))    // 需将他转化为字符型
+
+}
+
+
+将json转换结构体
+
+type test struct {
+	Name string         // 属性不许是共有的才能转换成json数据
+	Age int
+	Sex string
+}
+
+func main()  {
+	var str = `{"Name":"song","Age":21,"Sex":"male"}`
+	var ts test
+	err :=json.Unmarshal([]byte(str),&ts)         // 因为要对ts修改所以要传入结构体的地址
+	if err!=nil{
+		fmt.Println("存在错误")
+
+	}
+	fmt.Printf("%#v",ts)
+}
+
+
+结构体标签       # 就是用来当转换为json数据时，key对应的标签
+type test struct {
+	Name string   `json:"name"`
+	Age int           `json:"age"`
+	Sex string
+}
+
+
+
+
+
+接口： 
+
+var a interface{}        # 定义空接口类型，a可以是任意类型
+
+
+type Usber interface {          # 接口中的所有方法，只要使用接口，所有方法必须实现
+	start()
+	stop()
+}
+type Phone struct {
+	Name string
+}
+
+func (p Phone) start() {
+	fmt.Printf("%v开机\n",p.Name)
+}
+func (p Phone) stop() {
+	fmt.Printf("%v关机\n",p.Name)
+}
+
+
+func main() {
+	var p = Phone{
+		Name: "华为",
+	}
+	var p1 Usber = p
+	p1.start()
+	p1.stop()
+}
+
+
+
+空接口类型获取属性时要与 类型断言联合使用          // 空接口类型时不能使用索引的，使用断言后就可以使用索引 
+var inter,ok = a.T([]string)         # a是空接口类型，inter就是返回这个切片对象，ok就是判断a是否是[]string类型     
+
+
+
+
+
+并发 和 并行
+
+通过协程来实现并行
+ func test(){
+	for i:=0;i<10;i++{
+		fmt.Println("test")
+		time.Sleep(time.Millisecond*100)
+	}
+}
+func main() {
+	go test()          # 协程
+	for i:=0;i<10;i++{
+		fmt.Println("main")
+		time.Sleep(time.Millisecond*100)
+	}
+}
+这种方法，存在主线程执行完毕后，协程也会终止
+
+方法二：
+var syn sync.WaitGroup
+
+func test(){
+	for i:=0;i<10;i++{
+		fmt.Println("test")
+		time.Sleep(time.Millisecond*100)
+	}
+	syn.Done()     // 协程计数器-1
+}
+
+func main() {
+	syn.Add(1)  // 协程计数器加1
+	go test()
+	for i:=0;i<10;i++{
+		fmt.Println("main")
+		time.Sleep(time.Millisecond*50)
+	}
+	syn.Wait()     // 等待协程执行完毕
+}
+当主进程执行完，会等待协程
+
+
+
+
+
+管道 channel  (应用类型)       # 管道遵守先进先出原则
+
+管道还用于协程之间的联系
+管道的for range 没有key值
+
+var cha = make(chan int,3)      // 生成int数据的管道
+
+cha <- 20        // 管道插入数据
+<- 20         // 取出数据
+num := <-20  //取出数据
+close(cha)      // 关闭管道
+
+
+单向管道：
+1.只写管道
+var arr = make(chan <- int,1)
+
+2.只读管道
+var arr2 = make(<- chan int,1)
+
+
+
+多路复用：             # 主要用于实现多个管道的并发
+func main() {
+	var intm = make(chan int ,10)
+	var entm = make(chan string ,10)
+	for i:=0;i<10;i++{
+		intm<-i
+	}
+	for i:=0;i<10;i++{
+		entm <- fmt.Sprintf("_entm%v",i)
+	}
+
+	for {
+		select {                                        		# select 要与for循环连用
+		case v:=<-intm:
+			fmt.Printf("获取intm%v\n",v)
+		case v:=<-entm:
+			fmt.Printf("获取entm%v\n",v)
+		default:
+			fmt.Printf("获取完毕\n")
+			return
+		}
+	}
+}
+
+
+
+互斥锁：
+var syn sync.WaitGroup
+var mu sync.Mutex       // 互斥锁  用于解决资源竞争问题 ，当一个的协程正在访问时，别的协程不能对这个进行访问
+var count=0
+func test(){
+	mu.Lock()
+	count++
+	for i:=0;i<10;i++{
+		fmt.Printf("js%v,count:%v\n",i,count)
+	}
+	mu.Unlock()
+	syn.Done()
+}
+
+
+func main() {
+	for i:=0;i<10;i++{
+		syn.Add(1)
+		go test()
+	}
+	syn.Wait()
+
+}
+
+
+读写锁：     和互斥锁类似，主要是用于读操作并行，写操作互斥
+
+
+
+
+
+
+读取文件
+file,arr :=os.Open("")
+
+
+
+
+
+beego中模板自定义变量
+{{$Title := .title}}        将title的数据传给Title
+{{$Title}}     输出自定义变量
+
+
+
+
+cookie设置   客户端
+
+this.Ctx.SetCookie("username","song",1000,"/",".baidu.com")
+
+# 第一个参数是key,第二个是value  第三个是1000秒后关闭 ，第四个参数是cookie在指定url内有效 ，第五个参数是在指定域名内有效
+
+
+
+cookie加密 ，设置中文cookie
+
+c.Ctx.SetSecureCookie("123456","username","宋",1000)       # 第一个参数是秘钥，在获取时也要用到
+
+
+删除cookie通过设置cookie的保存时间为0或者-1
+
+
+session设置   服务端
+c.SetSession("username","song")
+
