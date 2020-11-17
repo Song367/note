@@ -4,4 +4,13 @@
         
         /*  people ---       [[7, 0], [7, 1], [6, 1], [5, 0], [5, 2], [4, 4]]    */
         
+        
+        /* github 上传步骤  */
+        git init
+        git add README.md
+        git commit -m "first commit"
+        git branch -M main
+        git remote add origin https://github.com/Song367/Spam.git
+        git push -u origin main
+        
 
