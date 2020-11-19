@@ -51,4 +51,16 @@
                 #     cur = cur.left
                 # return res[::-1]
         
+        
+        
+        
+                简化目录
+                def simplifyPath(path: str) -> str:
+                    r = []
+                    for s in path.split('/'):
+                        r = {'': r, '.': r, '..': r[:-1]}.get(s, r + [s])
+                    return '/' + '/'.join(r)
+                
+                
+        
 
