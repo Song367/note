@@ -1,0 +1,82 @@
+
+1.     micro   rpc 创建客户端与服务端  
+
+
+ /*                                                    protobuf  file                                              */
+
+syntax = "proto3";
+
+service Greeter {
+    rpc Hello(HelloRequest) returns (HelloResponse) {}
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string greeting = 2;
+}
+
+
+
+
+/ *                                        service.go                         */   
+
+
+
+package main
+
+import (
+	"fmt"
+	"microedit/message"
+	"net/http"
+	"net/rpc"
+	"net"
+)
+
+type Request message.HelloResponse
+
+func (this *Request)Hello(request message.HelloRequest,response *message.HelloResponse)error{
+	fmt.Println("service message",request.Name)
+	response.Greeting = request.Name + "8080"
+	return nil
+}
+
+func main(){
+
+	rpc.Register(new(Request))
+	rpc.HandleHTTP()
+
+	ln,_:=net.Listen("tcp","127.0.0.1:8080")
+	http.Serve(ln,nil)
+
+}
+
+
+
+
+/*                                client.go                             */
+
+
+package main
+
+import (
+	"fmt"
+	"microedit/message"
+	"net/rpc"
+)
+
+func main() {
+	var pp message.HelloResponse
+	cli , _:=rpc.DialHTTP("tcp","127.0.0.1:8080")
+	cli.Call("Request.Hello",message.HelloRequest{Name: "greeter point:"},&pp)
+
+	fmt.Println("最后得到",&pp)
+}
+
+
+
+
+
+
