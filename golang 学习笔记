@@ -77,6 +77,90 @@ func main() {
 
 
 
+---------------------   gjson 的使用  -----------------------------
+github.com/tidwall/gjson
+
+
+const json = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+
+func main(){
+	LastValue := gjson.Get(json,"name.last")
+	fmt.Println(LastValue.string())
+}
+
+路径可能包含通配符'*'和'?'.
+通过下标访问数组值.
+通过'#'来获取值在元素中的排位或访问子路径.
+.和通配符可以通过'\'来转义.
+
+{
+  "name": {"first": "Tom", "last": "Anderson"},
+  "age":37,
+  "children": ["Sara","Alex","Jack"],
+  "fav.movie": "Deer Hunter",
+  "friends": [
+    {"first": "Dale", "last": "Murphy", "age": 44},
+    {"first": "Roger", "last": "Craig", "age": 68},
+    {"first": "Jane", "last": "Murphy", "age": 47}
+  ]
+}
+
+
+"name.last"          >> "Anderson"
+"age"                >> 37
+"children"           >> ["Sara","Alex","Jack"]
+"children.#"         >> 3
+"children.1"         >> "Alex"
+"child*.2"           >> "Jack"
+"c?ildren.0"         >> "Sara"
+"fav\.movie"         >> "Deer Hunter"
+"friends.#.first"    >> ["Dale","Roger","Jane"]
+"friends.1.last"     >> "Craig"
+
+
+你同样能通过#[...]来查询数组中的第一个匹配的项, 或通过'#[...]#'查询所有匹配的项.
+查询支持==, !=, <, <=, >, >=比较运算符和'%'模糊匹配.
+
+friends.#[last=="Murphy"].first    >> "Dale"
+friends.#[last=="Murphy"]#.first   >> ["Dale","Jane"]
+friends.#[age>45]#.last            >> ["Craig","Murphy"]
+friends.#[first%"D*"].last         >> "Murphy"
+
+
+ForEachLines 方法可以迭代json.
+
+gjson.ForEachLine(json, func(line gjson.Result) bool{
+    println(line.String())
+    return true
+})
+
+
+判断json是否合法
+
+if !gjson.Valid(json) {
+    return errors.New("invalid json")
+}
+
+将值反序列化到map
+
+res ,ok :=gjson.parse(json).value().(map[string]interface{})
+if !ok{
+	fmt.Println("反序列化失败")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
