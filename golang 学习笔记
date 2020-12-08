@@ -152,6 +152,69 @@ if !ok{
 
 
 
+/* -------------------- reflect --------------------- */
+
+// 通过放射使用结构体字段
+
+type ReflectFactory struct {
+	Name string
+	Age int
+}
+
+func (s *ReflectFactory) A() {
+	fmt.Println("A")
+}
+
+func (s *ReflectFactory) B() {
+	fmt.Println("B")
+}
+
+func main() {
+	r := ReflectFactory{Name:"Ellison"}
+
+	field := "Name"
+
+	res := reflect.ValueOf(&r).Elem().FieldByName(field).String()
+	fmt.Println(res)
+}
+
+
+
+// 通过反射调用结构体对应的方法
+
+type ReflectFactory struct {
+	Name string
+	Age int
+}
+
+func (s *ReflectFactory) A(action string) string {
+	return action
+}
+
+func (s *ReflectFactory) B(action string) string {
+	return action
+}
+
+func main() {
+	r := ReflectFactory{Name:"Ellison"}
+
+	// 方法名称
+	field := "B"
+	valueS := reflect.ValueOf(&r)
+	method := valueS.MethodByName(field)
+	params := []reflect.Value{
+		reflect.ValueOf("song"), // 方法参数
+	}
+	res := method.Call(params)[0].String() // 返回的是字符串
+	fmt.Println(res)
+}
+
+
+
+
+
+
+
 
 
 
