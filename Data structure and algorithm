@@ -19,3 +19,19 @@ def twoSum(self, numbers: List[int], target: int) -> List[int]:
                 i += 1
                 
                 
+
+汉罗塔问题  三个柱子，n个盘子     A 中放了所有盘子 ， b, c 都为空
+def hanota(self, A: List[int], B: List[int], C: List[int]) -> None:
+
+        def hanoi(n,x,y,z):
+            if n == 1:
+                z.append(x.pop())
+                return
+            else:
+                hanoi(n-1,x,z,y)
+                hanoi(1,x,y,z)
+                hanoi(n-1,y,x,z)
+                
+        hanoi(len(A),A,B,C)
+
+           
