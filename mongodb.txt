@@ -1,72 +1,74 @@
-ÒòÎªMongoDBµÍ²ãÒýÇæÊ¹ÓÃJSÊµÏÖµÄ£¬ËùÒÔ²¿·ÖjsÓï·¨¿ÉÒÔÊµÏÖ
+é»˜è®¤ç«¯å£ï¼š27017
 
-mongodbÊý¾ÝÀàÐÍ£º
-Object ID£º
-String£º ×Ö·û´®£¬±ØÐëÊÇutf-8
-Boolean£º²¼¶ûÖµ
-Integer£ºÕûÊý
-Double£º¸¡µãÊý
-Arrays£ºÊý×é»òÕßÁÐ±í
-Object£º×Öµä
-Null£º¿ÕÊý¾ÝÀàÐÍ
-Timestamp£ºÊ±¼ä´Á
+å› ä¸ºMongoDBä½Žå±‚å¼•æ“Žä½¿ç”¨JSå®žçŽ°çš„ï¼Œæ‰€ä»¥éƒ¨åˆ†jsè¯­æ³•å¯ä»¥å®žçŽ°
+
+mongodbæ•°æ®ç±»åž‹ï¼š
+Object IDï¼š
+Stringï¼š å­—ç¬¦ä¸²ï¼Œå¿…é¡»æ˜¯utf-8
+Booleanï¼šå¸ƒå°”å€¼
+Integerï¼šæ•´æ•°
+Doubleï¼šæµ®ç‚¹æ•°
+Arraysï¼šæ•°ç»„æˆ–è€…åˆ—è¡¨
+Objectï¼šå­—å…¸
+Nullï¼šç©ºæ•°æ®ç±»åž‹
+Timestampï¼šæ—¶é—´æˆ³
 Date
 
 
-²é¿´Êý¾Ý¿â                   Ñ¡ÔñÊý¾Ý¿â                                                                                                                    É¾³ýÊý¾Ý¿â
-show databases (ËõÐ´dbs)          use admin          µ±Ñ¡Ôñ²»´æÔÚµÄÊý¾Ý¿âÊ±£¬»á×Ô¶¯´´½¨Õâ¸öÊý¾Ý¿â                  db.dropDatabse()  ÒªÏÈÑ¡ÖÐÊý¾Ý¿â
+æŸ¥çœ‹æ•°æ®åº“                   é€‰æ‹©æ•°æ®åº“                                                                                                                    åˆ é™¤æ•°æ®åº“
+show databases (ç¼©å†™dbs)          use admin          å½“é€‰æ‹©ä¸å­˜åœ¨çš„æ•°æ®åº“æ—¶ï¼Œä¼šè‡ªåŠ¨åˆ›å»ºè¿™ä¸ªæ•°æ®åº“                  db.dropDatabse()  è¦å…ˆé€‰ä¸­æ•°æ®åº“
 
-²é¿´¼¯ºÏ£¨±í£©            ´´½¨¼¯ºÏ                                                É¾³ý¼¯ºÏ
+æŸ¥çœ‹é›†åˆï¼ˆè¡¨ï¼‰            åˆ›å»ºé›†åˆ                                                åˆ é™¤é›†åˆ
 show collections          db.createCollection('admin2')              db.admin2.drop()
 
 
-¼¯ºÏµÄÔö£¬É¾£¬¸Ä£¬²é
+é›†åˆçš„å¢žï¼Œåˆ ï¼Œæ”¹ï¼ŒæŸ¥
 
-Ôö£ºdb.s_set.insert({name:'song',age:18})       # ºÍÊý¾Ý¿âÀàËÆ£¬Èç¹û²»´æÔÚÔò×Ô¶¯´´½¨¼¯ºÏ¡£Ã¿Ò»ÐÐÊý¾Ý»á×Ô¶¯Éú³ÉÒ»¸ö_id¼ü,Ò²¿É×Ô¼º¶¨Òå
-# _id¼ü×é³É²¿·Ö£ºÊ±¼ä´Á £¬ »úÆ÷ £¬pid £¬¼ÆÊýÆ÷
+å¢žï¼šdb.s_set.insert({name:'song',age:18})       # å’Œæ•°æ®åº“ç±»ä¼¼ï¼Œå¦‚æžœä¸å­˜åœ¨åˆ™è‡ªåŠ¨åˆ›å»ºé›†åˆã€‚æ¯ä¸€è¡Œæ•°æ®ä¼šè‡ªåŠ¨ç”Ÿæˆä¸€ä¸ª_idé”®,ä¹Ÿå¯è‡ªå·±å®šä¹‰
+# _idé”®ç»„æˆéƒ¨åˆ†ï¼šæ—¶é—´æˆ³ ï¼Œ æœºå™¨ ï¼Œpid ï¼Œè®¡æ•°å™¨
 
-²åÈë¶à¸öÊý¾Ý£º
+æ’å…¥å¤šä¸ªæ•°æ®ï¼š
 db.s_set.insert([{name:'1',age:2},{name:'2',age:3}])
 
-Ê¹ÓÃforÑ­»·²åÈëÊý¾Ý£º
+ä½¿ç”¨forå¾ªçŽ¯æ’å…¥æ•°æ®ï¼š
 for(var i=0;i<10;i++){
 	db.s_set.insert({name:'a'+i,age:i});
 }
 
 
-²éÑ¯£º
-db.s_set.find().pretty() # pretty()½øÐÐ¸ñÊ½»¯
+æŸ¥è¯¢ï¼š
+db.s_set.find().pretty() # pretty()è¿›è¡Œæ ¼å¼åŒ–
 
-db.s_set.find({Ìõ¼þ}£¬{ËùÐè»ñÈ¡ÁÐÃû})
+db.s_set.find({æ¡ä»¶}ï¼Œ{æ‰€éœ€èŽ·å–åˆ—å})
 
-db.s_set.find({age:6},{name:1})   # »ñÈ¡ÄêÁäÎª6µÄnameÁÐ
+db.s_set.find({age:6},{name:1})   # èŽ·å–å¹´é¾„ä¸º6çš„nameåˆ—
 
-db.s_set.find({age:6},{name:0})   # »ñÈ¡ÄêÁäÎª6µÄ³ýÁËnameÒâÍâµÄËùÓÐÁÐ 
+db.s_set.find({age:6},{name:0})   # èŽ·å–å¹´é¾„ä¸º6çš„é™¤äº†nameæ„å¤–çš„æ‰€æœ‰åˆ— 
 
-# ÔËËã·û
-$gt    ´óÓÚ
-$gte  ´óÓÚµÈÓÚ
-$lt     Ð¡ÓÚ
-$lte   Ð¡ÓÚµÈÓÚ
-$ne   ²»µÈÓÚ
-$in    in(·¶Î§ÄÚ)
+# è¿ç®—ç¬¦
+$gt    å¤§äºŽ
+$gte  å¤§äºŽç­‰äºŽ
+$lt     å°äºŽ
+$lte   å°äºŽç­‰äºŽ
+$ne   ä¸ç­‰äºŽ
+$in    in(èŒƒå›´å†…)
 $nin  not in
 
-db.s_set.find({age:{$gt:3}},{name:1})     # »ñÈ¡ÄêÁä´óÓÚ3µÄnameÁÐ
+db.s_set.find({age:{$gt:3}},{name:1})     # èŽ·å–å¹´é¾„å¤§äºŽ3çš„nameåˆ—
 
-db.s_set.find({age:{$in:[2,3,6]}},{name:1})   # »ñÈ¡ÄêÁäµÈÓÚ2,3,6µÄnameÁÐ
+db.s_set.find({age:{$in:[2,3,6]}},{name:1})   # èŽ·å–å¹´é¾„ç­‰äºŽ2,3,6çš„nameåˆ—
 
 
-¾ÛºÏ²éÑ¯£º
-	¹ÜµÀ£º
-	$group    # ·Ö×é
-	$match    # ¹ýÂËÊý¾Ý
-	$sort        # ÅÅÐò
-	$skip        # Ìø¹ýÖ¸¶¨ÎÄµµÊý
-	$limit        # ÏÞÖÆ¼¯ºÏÊý
+èšåˆæŸ¥è¯¢ï¼š
+	ç®¡é“ï¼š
+	$group    # åˆ†ç»„
+	$match    # è¿‡æ»¤æ•°æ®
+	$sort        # æŽ’åº
+	$skip        # è·³è¿‡æŒ‡å®šæ–‡æ¡£æ•°
+	$limit        # é™åˆ¶é›†åˆæ•°
 	
-	³£ÓÃ±í´ïÊ½£º
-	$sum    # ×ÜºÍ
+	å¸¸ç”¨è¡¨è¾¾å¼ï¼š
+	$sum    # æ€»å’Œ
 	$avg
 	$max
 	$min   
@@ -74,8 +76,8 @@ db.s_set.find({age:{$in:[2,3,6]}},{name:1})   # »ñÈ¡ÄêÁäµÈÓÚ2,3,6µÄnameÁÐ
 db.s_set.aggregate([
 	{
 		$group:{                            
-			_id:"$sex",                        #  °´ÕÕÐÔ±ðÈ¥·ÖÀà¼ÆËã     # _id:null   ¾ÍÊÇ²»·ÖÀà           Ö»ÓÐgroupÓÐÕâÒ»Ïî
-			rs:{$sum:"$age"}              #  ·µ»Ø½á¹ûÊÇageµÄºÍ   $sum:1   ¾Í±íÊ¾²é¿´¸öÊý£¬µÈÍ¬ÓÚcount
+			_id:"$sex",                        #  æŒ‰ç…§æ€§åˆ«åŽ»åˆ†ç±»è®¡ç®—     # _id:null   å°±æ˜¯ä¸åˆ†ç±»           åªæœ‰groupæœ‰è¿™ä¸€é¡¹
+			rs:{$sum:"$age"}              #  è¿”å›žç»“æžœæ˜¯ageçš„å’Œ   $sum:1   å°±è¡¨ç¤ºæŸ¥çœ‹ä¸ªæ•°ï¼Œç­‰åŒäºŽcount
 	}
 }
 ])
@@ -85,11 +87,11 @@ db.s_set.aggregate([
 		$group:{
 			_id:"$sex",                        
 			rs:{$sum:"$age"}              
-	}£¬
+	}ï¼Œ
 	{
 		$sort:{                       
-			rs:1                                   # °´ÕÕrs·µ»ØµÄ½á¹û½øÐÐÉýÐò                    
-	}£¬
+			rs:1                                   # æŒ‰ç…§rsè¿”å›žçš„ç»“æžœè¿›è¡Œå‡åº                    
+	}ï¼Œ
 }
 ])
 
@@ -97,44 +99,44 @@ db.s_set.aggregate([
 
 
 
-ÐÞ¸Ä£º
+ä¿®æ”¹ï¼š
 
-±à¼­Æ÷
+ç¼–è¾‘å™¨
 
-$set   ÐÞ¸ÄÊý¾Ý
-$inc   µÝÔö
-$rename   ÐÞ¸Ä×Ö¶Î
-$unset      É¾³ý
-Àý×Ó£º
-db.s_set.update(Ìõ¼þ£¬ÐÂÊý¾Ý)
+$set   ä¿®æ”¹æ•°æ®
+$inc   é€’å¢ž
+$rename   ä¿®æ”¹å­—æ®µ
+$unset      åˆ é™¤
+ä¾‹å­ï¼š
+db.s_set.update(æ¡ä»¶ï¼Œæ–°æ•°æ®)
 
-db.s_set.update({name:'song'},{name:'ss'})       # ÕâÊÇÕûÐÐÌæ»»²»ÊÇÐÞ¸Ä,½«songÌæ»»³Éss 
+db.s_set.update({name:'song'},{name:'ss'})       # è¿™æ˜¯æ•´è¡Œæ›¿æ¢ä¸æ˜¯ä¿®æ”¹,å°†songæ›¿æ¢æˆss 
 
-db.s_set.update({name:'song'},{$set:{name:'ss'}})     # ½«nameµÈÓÚsong Ìæ»»Îª ss
+db.s_set.update({name:'song'},{$set:{name:'ss'}})     # å°†nameç­‰äºŽsong æ›¿æ¢ä¸º ss
 
-db.s_set.update({name:'song'},{$inc:{age:2}})           # ½«nameÎªsong   µÄ  ÄêÁäµÝÔö2
+db.s_set.update({name:'song'},{$inc:{age:2}})           # å°†nameä¸ºsong   çš„  å¹´é¾„é€’å¢ž2
 
 db.s_set.update({name:'song'},{
-	$inc:{age:2},                               # ½«ÄêÁä¼Ó2
-	$set:{name:'ss'},                         # ½«song¸ÄÎªss
-	$rename:{name:'username'},     # ½«name¼ü¸ÄÎªusername
-	$unset:{sex:true}  		  # ½«unsetÕâÒ»ÁÐÉ¾³ý
+	$inc:{age:2},                               # å°†å¹´é¾„åŠ 2
+	$set:{name:'ss'},                         # å°†songæ”¹ä¸ºss
+	$rename:{name:'username'},     # å°†nameé”®æ”¹ä¸ºusername
+	$unset:{sex:true}  		  # å°†unsetè¿™ä¸€åˆ—åˆ é™¤
 })
 
 
-É¾³ýÎÄµµ £¨ÐÐ£©
-db.s_set.remove(Ìõ¼þ£¬[true,false])      # trueÊÇÉ¾³ýÒ»Ìõ   falseÉ¾³ý¶àÌõ
+åˆ é™¤æ–‡æ¡£ ï¼ˆè¡Œï¼‰
+db.s_set.remove(æ¡ä»¶ï¼Œ[true,false])      # trueæ˜¯åˆ é™¤ä¸€æ¡   falseåˆ é™¤å¤šæ¡
 
 
-ÅÅÐò
+æŽ’åº
 
-db.s_set.find().sort({age:1})       # 1´ú±íÉýÐò -1´ú±í½µÐò
+db.s_set.find().sort({age:1})       # 1ä»£è¡¨å‡åº -1ä»£è¡¨é™åº
 
-·ÖÒ³
+åˆ†é¡µ
 
-db.s_set.find().sort({age:-1}).skip(0).limit(2)      # ½µÐò£¬Ìø¹ý0ÐÐÊý¾Ý£¬ÏÞÖÆÏÔÊ¾2ÐÐ
+db.s_set.find().sort({age:-1}).skip(0).limit(2)      # é™åºï¼Œè·³è¿‡0è¡Œæ•°æ®ï¼Œé™åˆ¶æ˜¾ç¤º2è¡Œ
 
-¶¯Ì¬ÊµÏÖ·ÖÒ³skip¹«Ê½£º (µ±Ç°Ò³-1) * ·ÖÒ³¸öÊý
+åŠ¨æ€å®žçŽ°åˆ†é¡µskipå…¬å¼ï¼š (å½“å‰é¡µ-1) * åˆ†é¡µä¸ªæ•°
 
 
 
