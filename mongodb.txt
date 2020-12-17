@@ -143,6 +143,21 @@ db.s_set.find().sort({age:-1}).skip(0).limit(2)      # 降序，跳过0行数据
 
 
 
+/ * ------------------------------ pymongo ----------------------------- */
+
+#排序
+print('排序','='*50)
+results = collection.find().sort('name', pymongo.ASCENDING) #升序, pymongo.DESCENDING为降序
+print([result['name'] for result in results])
+
+#偏移
+print('偏移','='*50)
+results = collection.find().sort('name', pymongo.ASCENDING).skip(2) #偏移2位,忽略前两个数据
+print([result['name'] for result in results])
+results = collection.find().sort('name', pymongo.ASCENDING).skip(2).limit(2) #只输出2个数据
+print([result['name'] for result in results])
+
+
 
 
 
