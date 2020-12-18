@@ -291,8 +291,10 @@ authorized.Use(MyMiddelware()) {
     authorized.POST("/login", loginEndpoint) 
 }
 
-
-
+	
+ //  使用net/http 生成固定端口
+    router := gin.Default()
+    http.ListenAndServe(":8080", router)
 
 
 
