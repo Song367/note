@@ -212,8 +212,19 @@ func main() {
 
 
 
+/* ----------------------------------- gin框架 ----------------------------------*/
 
+//将request的body中数据,自动按照json格式解析到结构体
+ r.POST("loginJSON", func(c *gin.Context) {
+	var json Student
+     	c.ShouldBindJSON(&json)
+}
 
+// 表单数据绑定
+ r.POST("loginJSON", func(c *gin.Context) {
+	var form Student
+	c.Bind(&form)
+}
 
 
 
