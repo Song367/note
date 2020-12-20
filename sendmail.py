@@ -1,3 +1,4 @@
+# 发送邮件 及附件 通过pop3形式
 import re
 import smtplib
 from email.mime.multipart import MIMEMultipart
