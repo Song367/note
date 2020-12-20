@@ -1,3 +1,4 @@
+# 获取邮箱邮件及附件
 import os
 import poplib, email, telnetlib
 import datetime, time, sys, traceback
