@@ -1,3 +1,4 @@
+
         people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
         people = sorted(people, key = lambda x: (-x[0], x[1]))
         // 解释   以x[0]为主要，x[1]为次要的进行排序，-x[0]则代表降序
@@ -14,82 +15,45 @@
         git push -u origin main
         
         
-        
-        /* python 树的三种遍历 */
-          class Solution:
-            def inorderTraversal(self, root: TreeNode) -> List[int]:
-                res = []
-                stack = []
-                cur = root
-                # 中序，模板：先用指针找到每颗子树的最左下角，然后进行进出栈操作
-                while stack or cur:
-                    while cur:
-                        stack.append(cur)
-                        cur = cur.left
-                    cur = stack.pop()
-                    res.append(cur.val)
-                    cur = cur.right
-                return res
 
-                # # 前序，相同模板
-                # while stack or cur:
-                #     while cur:
-                #         res.append(cur.val)
-                #         stack.append(cur)
-                #         cur = cur.left
-                #     cur = stack.pop()
-                #     cur = cur.right
-                # return res
 
-                # # 后序，相同模板
-                # while stack or cur:
-                #     while cur:
-                #         res.append(cur.val)
-                #         stack.append(cur)
-                #         cur = cur.right
-                #     cur = stack.pop()
-                #     cur = cur.left
-                # return res[::-1]
+        /*   python pandas --------------------*/
+        pd.DataFrame(data,index= , columns= )
+        t是一个dataframe
         
         
+        pd.head() # 默认获取前5行
+        pd.tail() # 默认获取后5行
+        pd.info() # 显示dataframe的详情 在这里面可以看到有多少行，多少列，有没有空值
+        t.unique()   # 生成的数据唯一
         
-        
-                简化目录
-                def simplifyPath(path: str) -> str:
-                    r = []
-                    for s in path.split('/'):
-                        r = {'': r, '.': r, '..': r[:-1]}.get(s, r + [s])
-                    return '/' + '/'.join(r)
-                    
-                   
-        动态规划  -  找相邻最近的字符串和
-        def maxSubArray( nums) -> int:
-            for i in range(1, len(nums)):
-                nums[i] = max(nums[i - 1] + nums[i], nums[i])
-            return max(nums)
-                
-        
-        
-        
-        ----------------------------------   回溯算法   -    找集合的子集[1,2,3]   --------------------------------
-        
-        def subsets(self, nums: List[int]) -> List[List[int]]:
-                res = []
-                n = len(nums)
-                def helper(i, tmp):
-                    res.append(tmp)
-                    for j in range(i, n):
-                        helper(j + 1,tmp + [nums[j]] )
-                helper(0, [])
-                return res
-        
-        结果：
-        [[]]
-        [[], [1]]
-        [[], [1], [1, 2]]
-        [[], [1], [1, 2], [1, 2, 3]]
-        [[], [1], [1, 2], [1, 2, 3], [1, 3]]
-        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2]]
-        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3]]
-        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+        # 通过标签去获取数据
+        t.loc()  
+        t.loc(["a",:])     # 获取第a行的所有列
+        t.iloc([["a","b"],"v"])    # 获取第a,b行的v列
 
+        # 通过索引去获取数据
+        t.iloc()
+        t.iloc([:,0])     # 获取所有行的第一列
+        t.iloc([[0,1],:])  # 获取第一行和第二行的所有列
+        
+        t.isnull()
+        t.notnull()
+        t.dropna(axis=0,how="all",inplace=False)     # axis=0 行 ， how="all" 当整行或者整列都是nan时，就删除      
+        # how = "any" 只要有一个nan就删除 ，inplace = False 生成新的数据 ， inplace = True 修改原数据 
+        
+        # 填nan
+        
+        t.fillna(t.mean())     # 用平均值去填充        
+        t.["age"] = t["age"].fillna(t["age"].mean())      # 只填充某一列并保存到原来数据
+        
+        # 合并数据
+        
+        t.join(t2)     # 默认以行来合并  合并时以t为准
+        
+        t.merge(t2,on="a",how="outer")      # on= 指定以哪一列进行合并， 
+        # how = 指定合并方式  默认inner连接 ， outer 外连接 ， left 左连接表示以t为准 ， right有链接 表示以t2为准 
+        
+        当两个列名不相同时 ， 就可以用left_on , right_on   例如t.merge(t2,left_on="a",right_on="b")     表示以t的a列 和 t2的b列 来内连接    
+
+        
