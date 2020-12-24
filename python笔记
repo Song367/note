@@ -55,5 +55,28 @@
         # how = 指定合并方式  默认inner连接 ， outer 外连接 ， left 左连接表示以t为准 ， right有链接 表示以t2为准 
         
         当两个列名不相同时 ， 就可以用left_on , right_on   例如t.merge(t2,left_on="a",right_on="b")     表示以t的a列 和 t2的b列 来内连接    
+        
+        
+        
+        分组
+        groupobj = t.groupby(by="a")      # 以a列分组     返回是dataframe，可以通过for k,v in groupobj: 实现打印
+        
+        t["brand"].groupby(by=[t["a"],t["b"]])       # 将某一列 再按照a ， b两列来分组 
+        
+        groupobj.count()  # 统计每一行的个数
+        groupobj["b"].count()       # 指定某一列的个数
+        
+        
+        索引
+        
+        t.index = ["a","b"]         # 将原来的索引修改成 a, b
+        
+        t.set_index("a",drop=Ture)      # 将某一列作为索引   drop=True 删除作为索引的这一列
+        
+        t.set_index("a",drop=False).index.unique()       # 将索引设置为唯一
+        
+        t.swaplevel()  # 将设置的多个索引层次话       
+        t.sortlevel()   # 将设置的多个索引排序
+        
 
         
