@@ -33,5 +33,88 @@ def hanota(self, A: List[int], B: List[int], C: List[int]) -> None:
                 hanoi(n-1,y,x,z)
                 
         hanoi(len(A),A,B,C)
+        
+        
+        
+        
+  /*-------------------- python 树的三种遍历 ----------------------*/
+          class Solution:
+            def inorderTraversal(self, root: TreeNode) -> List[int]:
+                res = []
+                stack = []
+                cur = root
+                # 中序，模板：先用指针找到每颗子树的最左下角，然后进行进出栈操作
+                while stack or cur:
+                    while cur:
+                        stack.append(cur)
+                        cur = cur.left
+                    cur = stack.pop()
+                    res.append(cur.val)
+                    cur = cur.right
+                return res
+
+                # # 前序，相同模板
+                # while stack or cur:
+                #     while cur:
+                #         res.append(cur.val)
+                #         stack.append(cur)
+                #         cur = cur.left
+                #     cur = stack.pop()
+                #     cur = cur.right
+                # return res
+
+                # # 后序，相同模板
+                # while stack or cur:
+                #     while cur:
+                #         res.append(cur.val)
+                #         stack.append(cur)
+                #         cur = cur.right
+                #     cur = stack.pop()
+                #     cur = cur.left
+                # return res[::-1]
+        
+        
+        
+        
+                简化目录
+                def simplifyPath(path: str) -> str:
+                    r = []
+                    for s in path.split('/'):
+                        r = {'': r, '.': r, '..': r[:-1]}.get(s, r + [s])
+                    return '/' + '/'.join(r)
+                    
+                   
+       ------------------  动态规划  -  找相邻最近的字符串和 --------------------
+        def maxSubArray( nums) -> int:
+            for i in range(1, len(nums)):
+                nums[i] = max(nums[i - 1] + nums[i], nums[i])
+            return max(nums)
+                
+        
+        
+        
+        ----------------------------------   回溯算法   -    找集合的子集[1,2,3]   --------------------------------
+        
+        def subsets(self, nums: List[int]) -> List[List[int]]:
+                res = []
+                n = len(nums)
+                def helper(i, tmp):
+                    res.append(tmp)
+                    for j in range(i, n):
+                        helper(j + 1,tmp + [nums[j]] )
+                helper(0, [])
+                return res
+        
+        结果：
+        [[]]
+        [[], [1]]
+        [[], [1], [1, 2]]
+        [[], [1], [1, 2], [1, 2, 3]]
+        [[], [1], [1, 2], [1, 2, 3], [1, 3]]
+        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2]]
+        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3]]
+        [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+
+
 
            
