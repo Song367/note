@@ -299,8 +299,40 @@ authorized.Use(MyMiddelware()) {
 
 
 
+-----------------------   goroutine   50个协程来实现数字减1 ------------------
 
+var y = 100000
+var l sync.Mutex
+var wg sync.WaitGroup
 
+// 互斥锁版加函数
+func reduce(x int) {
+	defer wg.Done()
+	for {
+		l.Lock()
+		if y>0{
+			y--
+		}
+		l.Unlock()
+		fmt.Println("第",x,"协程执行的值: ",y)
+		if y<=0{
+			break
+		}
+	}
+}
+
+func main() {
+	StartTime := time.Now()
+	wg.Add(50)
+	for i:=0;i<50;i++{
+		go reduce(i)
+	}
+	wg.Wait()
+	EndTime := time.Now()
+	fmt.Println("----------------协程消费时间: ",EndTime.Sub(StartTime),"  ---------------------")
+	fmt.Println("y是否等于0\t",y==0)
+	fmt.Println("-------------ending-------------")
+}
 
 
 
