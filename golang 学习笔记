@@ -335,5 +335,13 @@ func main() {
 }
 
 
+/*   -----------------------------------------------    go 正则表达式       --------------------------------------------------*/
+
+	str := strings.Replace(res[0]["Create Table"], "\n", "", -1)      // 将\n 替换
+	match := fmt.Sprintf(`.%s(.*?),`, v1["COLUMN_NAME"])
+	reg, _ := regexp.Compile(match)
+	sub := reg.FindSubmatch([]byte(str))
+
+
 
 
