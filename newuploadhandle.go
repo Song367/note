@@ -98,7 +98,7 @@ func Ppload(writer http.ResponseWriter, request *http.Request) {
 		defer upFile.Close()
 
 		path := util.GetUuid(file[i].Filename) + path.Ext(file[i].Filename)
-		fSrc, err := ioutil.ReadAll(upFile)
+		fSrc, err := ioutil.ReadAll(upFile)         //  使用ioutil.ReadAll(file)  会把文件读取掉  从而导致io.copy()  的结果是空文件
 		res := GetFileType(fSrc[:10])
 		if res==""{
 			logs.Fatal(fmt.Sprintf("%s is not image",file[i].Filename))
