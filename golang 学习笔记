@@ -430,6 +430,8 @@ func uploadOne(w http.ResponseWriter, r *http.Request) {
 
 /*  --------------------------------------------   批量上传文件  -----------------------------------------------*/
 
+//  注意一点 ， 不能使用 ioutil.ReadAll(file)  这样会把文件读取掉 ， 后面保存的只是空文件。 
+
 
 func uploadMore(w http.ResponseWriter, r *http.Request) {
     if r.Method == "POST" {
