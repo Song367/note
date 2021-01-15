@@ -1,3 +1,54 @@
+/* -----------------------------------  xorm 操作数据库  ---------------------------------------------- */
+
+插入数据
+orm.InsertOne(report)
+
+根据id 查询指定数据 
+orm.SQL("select * from reports where id=?", id).Get(&report)
+
+查询数据
+total 是值
+rows := db.QueryRow(sql)
+rows.Scan(&total)
+
+使用sql查询数据 并返回map[string]string
+orm.QueryString("select user_name from t_user where user_id=?", userId)
+
+更新指定的列
+orm.Where("id=?", reports.Id).And("deleted=0").Cols("title", "brief", "report_content", "start_time", "end_time").Update(&reports)
+
+根据id 更新数据
+1.方法一  
+  orm.Update(report{
+		TaskType:    task.TaskType,
+		NodeType:    task.NodeType,
+		UpgradeType: task.UpgradeType,
+		Env:         task.Env,
+		Apps:        task.Apps,
+		Role:        task.Role,
+		UpdateTime:  time.Now(),
+	}, report{
+		Id: task.Id,
+	})
+
+
+ 2.方法二
+ orm.Where("id=?",id).Update(report)
+
+
+删除数据
+orm.Delete(&report{TaskId: taskId})
+
+
+根据sql 删除数据
+orm.Exec("delete from sap_ansiable_tasks where id = ?", taskId)
+
+
+
+
+
+
+
 
 1.     micro   rpc 创建客户端与服务端  
 
