@@ -1,3 +1,24 @@
+/*  ---------------------------------------操作azure 创建资源  ---------------------------------------- */
+
+const (
+	authKey = `uSTIIQRBD+sQtQ00n+3gAnzPLt2EpZ1VdQ6xu2MwhWdO3uWusAHoGVrvmVmE1ohRTlDI3VlON6eQi+gY/IxNPf+W3elF038xzaLAdkfZMi375A7FRgaZJ2ALGk+Ki9ANHmu0wyy1gmJ0YPyKxWqmhHpx2RLa0jbMabQOAByG+sITSf9H0Hjj1HHoun3U5QjCz3trkhg7QO6h1NvjnL3kJ9xEG3jOSPx0Rz+tmQtBhpKXsnqe8bH18k871krFDB3zVJmrauu5uIWNzovtxADp6mYybcK7BRZOBYHG/Mc7/UXLgivZ/Duann7o3C5HeNuSUx9s+dzsOQcy2KNkf9fTwRy2JGBlpczhyQ/rihHqmST2tmitvQnK3aAIAibZ+Umhxv/r09L/XQ+A4QFPQAtkXDUSPRNyCLgYcNxYTPwRnbV+x9Lvx6x4X99nuTGay/tjnYKt7NZTKsOUbMwuhbhSOqdV1+zmzy40bQHqHaD+tbI6KkorhdDtpxeyqFPTB6AmslSEvfgtAflB8EUcVTlg4bsxx3xbCkluQJtlp11QaccTA2oVoCnqxRWYDb2PmVjEY0zRlGAdRpreimD3U30z6XzeN1ZYV71l+xUU40GlY0BRgMihNjtAqw7desZaMBmuoJ7DFCxyNZB7VVOYMfHSlfQgCZ+4e3b3XTou0yt9tpYL4E0WeoKCou7UsxnIxMBFhlMiZDkZv0wvLQRK0TvTtUH5366d6iPDv0P4Yxfmb6+TArwYcGEDQyxwciR9gZ9qMYtqV2GrZhKvVHuMb7iMi0EsYv8dPRogXfLGWmrxG1Zmm3Yp3t1WNsTahZwCKaFPILHFd2NtinsZOi8Sou9wJB1HMpFlehjL7M8h2BIWZyEsnFqfqC05mrf/y+M1FG41qQTH7fKMYwk0z7SWQne0YgVOi5dmUMwU5TeSLPi4seogvQtYfEfIDKdrfr4xwE5bEtZJqI5r0bA3rr/O0cA/IuRSO0lBnAcrnpYyh8wt9edcd1c+pSMVfjhXNTbYk35nR10S5295ui2/3KoLsHswgg==`
+	regionId = "cn-beijing"
+	)
+
+func main(){
+	var client http.Client
+	//reqURL := fmt.Sprintf("%s/rest/%s/usage-reports", "https://ea.azure.cn", "connect")
+	req , _ :=http.NewRequest("Get","https://ea.azure.cn",nil)
+	req.Header.Set("Authorization", authKey)
+	req.Header.Set("api-version", "1.0")
+	rsp , _ := client.Do(req)
+	body, _ := ioutil.ReadAll(rsp.Body)
+	fmt.Println(string(body))
+
+}
+
+
+
 /* -----------------------------------  xorm 操作数据库  ---------------------------------------------- */
 
 插入数据
