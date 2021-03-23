@@ -1,3 +1,26 @@
+/* -------------------------------------- 创建阿里云oss 资源 ------------------------------------------ */
+const (
+	regionId = "cn-beijing"
+	accessKeyID = "LTAI4GAbg71q581wqcCmrN3S"
+	accessKeySecret = "J14PuV0AZgAJo0ZrLO2zGow36nzeWh"
+)
+
+func main(){
+	endpoint := fmt.Sprintf("https://oss-%s.aliyuncs.com", regionId)
+	client, err := oss.New(endpoint,accessKeyID , accessKeySecret)
+	if err != nil {
+		fmt.Println(err)
+	}
+	err =client.CreateBucket("song-oss-bucket-second")
+	if err!=nil{
+		fmt.Println(err)
+		panic(err)
+	}
+	fmt.Println("Create Successfully")
+}
+
+
+
 /*  ---------------------------------------操作azure 创建资源  ---------------------------------------- */
 
 const (
