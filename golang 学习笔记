@@ -1,8 +1,8 @@
 /* -------------------------------------- 创建阿里云oss 资源 ------------------------------------------ */
 const (
 	regionId = "cn-beijing"
-	accessKeyID = "LTAI4GAbg71q581wqcCmrN3S"
-	accessKeySecret = "J14PuV0AZgAJo0ZrLO2zGow36nzeWh"
+	accessKeyID = ""
+	accessKeySecret = ""
 )
 
 func main(){
