@@ -55,6 +55,10 @@ total 是值
 rows := db.QueryRow(sql)
 rows.Scan(&total)
 
+查询多个值
+var list = make([]reslist,0)
+orm.sql(sql).find(list)
+
 使用sql查询数据 并返回map[string]string
 orm.QueryString("select user_name from t_user where user_id=?", userId)
 
