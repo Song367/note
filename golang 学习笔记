@@ -117,6 +117,11 @@ message HelloResponse {
     string greeting = 2;
 }
 
+message User {
+    map<string,string> CMap = 1;
+    repeated CList = 2;
+}
+
 
 
 
@@ -143,7 +148,8 @@ func (this *Request)Hello(request message.HelloRequest,response *message.HelloRe
 }
 
 func main(){
-
+	// micro.RegisterTTL()  设置服务过期时间
+	// micro.RegisterInterval() 设置服务在时间到达后，重新注册服务
 	rpc.Register(new(Request))
 	rpc.HandleHTTP()
 
