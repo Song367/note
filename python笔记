@@ -1,3 +1,35 @@
+
+/* ------------------------------   多线程   -----------------------------------------*/
+import threading
+
+class Th(threading.Thread):
+    def __init__(self,Id):
+        super().__init__()
+        self.ID = Id
+    
+    def run():
+        print_time(self.ID)
+        
+def print_time(id):
+    print(id)
+
+
+t = Th(1)
+
+t.start()
+
+/* -------------------------------- 多进程  --------------------------------------------*/
+
+import multiprocessing
+
+def a(x):
+    print(x)
+
+p1 = multiprocessing.Process(target=a,args=(1,))
+p1.start()
+p1.join()
+
+
 /*---------------------------------- 装饰器  ------------------------------------------ */
 
 Python中的装饰器是通过利用了函数特性的闭包实现的，所以在说装饰器之前，我们需要先了解函数特性，以及闭包是怎么利用了函数特性的。
