@@ -1,0 +1,55 @@
+1.  下载mysql yum源 
+wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+
+
+2.  安装mysql 到本地yum源
+rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
+或
+yum localinstall mysql80-community-release-el7-3.noarch.rpm -y
+
+3. 查看是否添加到yum源中
+yum repolist | grep mysql
+
+(4) 修改mysql版本：根据需求决定安装版本
+关闭mysql8
+sudo yum-config-manager --disable mysql80-community
+
+打开mysql5.7
+sudo yum-config-manager --enable mysql57-community
+
+
+4.  yum安装mysql
+yum -y install mysql-community-server
+
+5. 查看初始密码
+yum repolist enabled | grep "mysql.*-community.*"
+
+6. 修改密码
+mysql5.7版本：
+      （1） 修改密码强度
+            set global validate_password_policy=LOW;
+      （2） 修改密码长度
+            set global validate_password_length=6;
+      （3） 修改密码
+            ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+            
+      （4） 设置mysql 远程连接
+            GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+            
+       （5） 刷新权限
+            flush privileges;
+            
+            
+mysql8:
+      （1） 修改密码强度
+            set global validate_password.policy=0;
+      （2） 修改密码长度
+            set global validate_password.length=6;
+      （3） 修改密码
+            ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+            
+      （4） 设置mysql 远程连接
+            use mysql;
+            update user set host="%" where user='root';
+            GRANT ALL ON *.* TO 'root'@'%';
+            flush privileges;
