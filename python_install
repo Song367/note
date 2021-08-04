@@ -1,0 +1,33 @@
+安装依赖：
+yum -y groupinstall "Development tools"
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+yum install -y libffi-devel zlib1g-dev
+yum install zlib* -y
+
+下载压缩包
+wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
+
+
+解压
+tar -zxvf  Python-3.7.2.tar.xz -C /usr/local
+
+cd /usr/local/Python-3.7.2
+./configure
+make
+sudo make install
+
+生成软连接
+ln -s /usr/local/python3/bin/python3 /usr/local/bin/python3
+ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3
+
+
+设置pip 下载源：
+cd ~
+mkdir .pip
+cd .pip
+vim pip.conf
+
+pip.conf 文件内容如下
+
+[global]
+index-url = https://mirrors.aliyun.com/pypi/simple
