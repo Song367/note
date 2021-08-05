@@ -1,0 +1,69 @@
+1. 安装nginx
+
+2. 安装uwsgi    django启动服务器
+（1）https://uwsgi-docs.readthedocs.io/en/latest/Download.html    下载uwsgi
+（2）# 解压文件  tar -zxvf uwsgi 
+（3）# 进入解压目录  sudo python3 setup.py install
+（4）测试uwsgi 
+
+3. 在django项目中添加uwsgi.ini 文件
+文件内容如下：
+[uwsgi]
+chdir = /home/song/django_test    
+# //项目根目录
+module = django_test.wsgi:application     
+#//  指定wsgi模块下的application对象
+socket = 127.0.0.1:8000         
+#//对本机8000端口提供服务
+master = true                   
+#//主进程
+
+# 以上4个是核心配置项
+
+#vhost = true          //多站模式
+#no-site = true        //多站模式时不设置入口模块和文件
+#workers = 2           //子进程数
+#reload-mercy = 10
+#vacuum = true         //退出、重启时清理文件
+#max-requests = 1000
+#limit-as = 512
+#buffer-size = 30000
+#pidfile = /var/run/uwsgi9090.pid    //pid文件，用于下脚本启动、停止该进程
+#daemonize = /home/feixue/python/www/for_test/run.log    // 日志文件
+#disable-logging = true   //不记录正常信息，只记录错误信息
+
+
+配置项中以‘#’开头的都是被注释的项目，不起作用；
+以双斜杠开头，表示注释；
+chdir是你的项目根目录。我这里的项目名叫for_test；
+moudule是你的入口wsgi模块，将for_test替换成你的项目名称；
+socket是通信端口设置，和我一样就行；
+master=True表示以主进程模式运行；
+demonize是你的日志文件，会自动建立
+disable-logging = true 表示不记录正常信息，只记录错误信息。否则你的日志可能很快就爆满了。
+env： 指定DJANGO_SETTINGS_MODULE的值
+home：可选的项目虚拟环境路径
+
+
+5. 配置nginx.conf 
+server {
+    listen 80;
+
+    listen [::]:80;
+
+    server_name 192.168.249.131;
+
+    location / {
+        include  uwsgi_params;
+        uwsgi_pass  127.0.0.1:8000;     # 端口号需保持和uwsgi一致  
+    }
+
+    location /static {                  # 静态文件
+        alias /home/feixue/python/www/for_test/static;
+    }
+}
+
+6.  启动nginx  
+7.  启动uwsgi    执行命令：uwsgi uwsgi.ini
+
+
