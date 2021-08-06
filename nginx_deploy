@@ -66,4 +66,9 @@ server {
 6.  启动nginx  
 7.  启动uwsgi    执行命令：uwsgi uwsgi.ini
 
+8.  在ini文件中加入  
+pidfile=%(chdir)/uwsgi/uwsgi.pid       # 可通过pid文件完成 uwsgi --reload *.pid       uwsgi --stop *.pid
+
+stats=%(chdir)/uwsgi/uwsgi.status      # 可查看状态   uwsgi --connect-and-readuwsgi/uwsgi.status
+
 
