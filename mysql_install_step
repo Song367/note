@@ -21,6 +21,9 @@ sudo yum-config-manager --enable mysql57-community
 4.  yum安装mysql
 yum -y install mysql-community-server
 
+当命令执行失败时，再尝试
+yum install mysql mysql-server mysql-libs mysql-server
+
 5. 查看初始密码
 yum repolist enabled | grep "mysql.*-community.*"
 
