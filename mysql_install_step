@@ -25,7 +25,7 @@ yum -y install mysql-community-server
 yum install mysql mysql-server mysql-libs mysql-server
 
 5. 查看初始密码
-yum repolist enabled | grep "mysql.*-community.*"
+grep "password is generated" /var/log/mysqld.log | awk '{print $NF}'
 
 6. 修改密码
 mysql5.7版本：
