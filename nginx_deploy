@@ -1,10 +1,38 @@
 1. 安装nginx
+sudo yum install -y epel-release
+sudo yum -y update
+sudo yum install -y nginx
+
+
 
 2. 安装uwsgi    django启动服务器
+方法一：
+   pip install uwsgi
+
+方法二：
 （1）https://uwsgi-docs.readthedocs.io/en/latest/Download.html    下载uwsgi
 （2）# 解压文件  tar -zxvf uwsgi 
 （3）# 进入解压目录  sudo python3 setup.py install
 （4）测试uwsgi 
+
+1. 安装nginx
+sudo yum install -y epel-release
+sudo yum -y update
+sudo yum install -y nginx
+
+
+
+2. 安装uwsgi    django启动服务器
+方法一：
+   pip install uwsgi
+
+方法二：
+（1）https://uwsgi-docs.readthedocs.io/en/latest/Download.html    下载uwsgi
+（2）# 解压文件  tar -zxvf uwsgi 
+（3）# 进入解压目录  sudo python3 setup.py install
+（4）测试uwsgi 
+
+
 
 3. 在django项目中添加uwsgi.ini 文件
 文件内容如下：
