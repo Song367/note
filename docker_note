@@ -1,0 +1,27 @@
+docker :
+
+docker 可以实现应用程序隔离，让程序拥有独立环境，可跨主机，跨服务器。
+
+docker  通过镜像完成所有操作。镜像由一层一层的文件系统unionfs组成。
+
+docker volume 数据卷用来保证数据的持久性。也可完成数据共享。
+ 
+ 
+*******************  命令操作  *********************
+
+docker run 运行且创建容器
+
+docker ps 查看容器
+
+docker build 创建镜像
+docker commit 创建镜像    
+
+docker start 运行容器  [stop|restart]
+
+docker tag 修改镜像标签
+
+******************  镜像操作  ******************
+docker images
+docker pull 拉去镜像
+docker push 上传镜像
+
