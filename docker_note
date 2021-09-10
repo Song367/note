@@ -12,7 +12,8 @@ docker 具有版本控制功能
 *******************  命令操作  *********************
 
 docker run 运行且创建容器
-
+docker attach 进入容器
+docker exec -it /bin/bash  进入容器
 docker ps 查看容器
 
 docker build 创建镜像
@@ -26,4 +27,13 @@ docker tag 修改镜像标签
 docker images
 docker pull 拉去镜像
 docker push 上传镜像
+
+*****************    数据卷   *****************
+对某个容器添加数据卷
+docker run -it -v 主机挂载路径:容器挂载路径 
+
+docker run -it -name dc01 --volumes-from -name dc02 song/centos             # dc01 共享 dc02的数据卷
+
+
+
 
